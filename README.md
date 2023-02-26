@@ -18,3 +18,17 @@
  * SetClassLongPtrW
 
  * WM_SETCURSOR
+
+Build example:
+
+## Arch Linux
+
+If using the MSVC toolchain via WINE. Recommend using this package on Arch AUR: https://aur.archlinux.org/packages/msvc-wine-git
+
+> mkdir build && cd build
+
+> cmake -DCMAKE_TOOLCHAIN_FILE=/opt/msvc/cmake/toolchain-x64.cmake -DCMAKE_BUILD_TYPE=Release ..
+
+> make
+
+There's also a toolchain file in the repo for mingw64 cross compilation. This is not guaranteed to work anymore.
