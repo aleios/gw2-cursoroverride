@@ -164,9 +164,16 @@ static HICON createIcon(const std::string& filename)
     return handle;
 }
 
+static HCURSOR loadCur(const std::string& filename)
+{
+    return (HCURSOR)LoadImage(nullptr, filename.c_str(), IMAGE_CURSOR, 0, 0, LR_LOADFROMFILE);
+}
+
 static HCURSOR createCursor(const std::string& filename)
 {
-    return static_cast<HCURSOR>(createIcon(filename));
+    if(filename.ends_with(".png"))
+        return static_cast<HCURSOR>(createIcon(filename));
+    return loadCur(filename);
 }
 
 // ==== Arcdps Entry point ====
@@ -198,7 +205,7 @@ arcdps_exports* mod_init()
     log_arc((char*)"[Cursor Override] Hooks initialized");
 
     // Load cursor.
-    myCursor = createCursor("cursor.png");
+    myCursor = createCursor("cursor.ani");
 
     // Tell arc what we are.
     memset(&arcExports, 0, sizeof(arcExports));
